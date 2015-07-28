@@ -954,5 +954,16 @@ class PersistenceTest < ActiveRecord::TestCase
       ActiveRecord::Base.connection.drop_table widget.table_name
       widget.reset_column_information
     end
+
   end
+
+  def test_just_created
+    topic = Topic.new(title: 'Saving')
+    assert_not topic.just_created?
+    topic.save!
+    assert topic.just_created?
+    assert Topic.create(title: 'Creating').just_created?
+  end
+
+
 end

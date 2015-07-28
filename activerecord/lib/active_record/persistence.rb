@@ -100,6 +100,12 @@ module ActiveRecord
       !(@new_record || @destroyed)
     end
 
+    # Returns true if this object was a new record but has now been saved.
+    def just_created?
+      sync_with_transaction_state
+      @just_created ||= false
+    end
+
     # Saves the model.
     #
     # If the model is new a record gets created in the database, otherwise
@@ -542,6 +548,7 @@ module ActiveRecord
       self.id ||= new_id if self.class.primary_key
 
       @new_record = false
+      @just_created = true
       id
     end
 

@@ -1,3 +1,8 @@
+*   Adds `just_created?` method to ActiveRecord::Persistence to distinguish (e.g. inside an after_save hook)
+    between a record that was just created and a record that was just updated.
+
+    *Aaron Zinger*
+
 *   Properly allow uniqueness validations on primary keys.
 
     Fixes #20966.
